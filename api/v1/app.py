@@ -5,10 +5,20 @@ Instance of Flask app
 import os
 from flask import Flask
 from models import storage
+from werkzeug.exceptions import NotFound
 from api.v1.views import app_views
+from flask import jsonify
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
+
+
+@app.errorhandler(NotFound)
+def handle_404(error):
+    """Handle 404 errors"""
+    response = jsonify({"error": "Not found"})
+    response.status_code = 404
+    return response
 
 
 @app.teardown_appcontext
