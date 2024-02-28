@@ -8,11 +8,13 @@ from models import storage
 from werkzeug.exceptions import NotFound
 from api.v1.views import app_views
 from flask import jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
 host = os.getenv('HBNB_API_HOST', '0.0.0.0')
 port = int(os.getenv('HBNB_API_PORT', 5000))
 app.register_blueprint(app_views, url_prefix="/api/v1")
+cors = CORS(app, resources={'/*': {'origins': '0.0.0.0'}})
 
 
 @app.errorhandler(NotFound)
