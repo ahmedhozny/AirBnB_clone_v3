@@ -106,5 +106,5 @@ class TestFileStorage(unittest.TestCase):
         count_all_1 = models.storage.count()
         count_states_1 = models.storage.count(State)
         self.assertEqual(count_all_1 - count_all, 1)
-        self.assertGreater(count_states_1 - count_states, 1)
+        self.assertEqual(count_states_1 - count_states, 1)
         models.storage.delete(new)
